@@ -9,7 +9,8 @@ public class TestMain {
 
         try {
             threadSafe.join();
-            threadSafe.getName();;
+            threadSafe.getName();
+            ;
             Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -54,6 +54,12 @@ class Test {
         }
     }
 
+    public static <K extends Comparable<? super K>, V> Map<K, V> sortByKey(Map<K, V> map) {
+        Map<K, V> result = new LinkedHashMap<>();
+        map.entrySet().stream().sorted(Map.Entry.<K, V>comparingByKey()).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
+        return result;
+    }
+
     public void sort(int[] a, int low, int high) {
         int start = low;
         int end = high;
@@ -82,17 +88,20 @@ class Test {
             //此时第一次循环比较结束，关键值的位置已经确定了。左边的值都比关键值小，右边的值都比关键值大，但是两边的顺序还有可能是不一样的，进行下面的递归调用
         }
         //递归
-        if (start > low) sort(a, low, start - 1);//左边序列。第一个索引位置到关键值索引-1
-        if (end < high) sort(a, end + 1, high);//右边序列。从关键值索引+1 到最后一个
+        if (start > low) {
+            sort(a, low, start - 1);//左边序列。第一个索引位置到关键值索引-1
+        }
+        if (end < high) {
+            sort(a, end + 1, high);//右边序列。从关键值索引+1 到最后一个
+        }
     }
-
 
     public void test(String[] args) throws Exception {
         ReentrantLock lock = new ReentrantLock();
         boolean b = lock.tryLock();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
-        objectObjectHashMap.put("","");
+        objectObjectHashMap.put("", "");
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap<>(8);
         concurrentHashMap.put("", "");
 //        byte[] bytes = null;
@@ -121,12 +130,6 @@ class Test {
 //        fos.write(bytes);
 //
 //        os.close();
-    }
-
-    public static <K extends Comparable<? super K>, V> Map<K, V> sortByKey(Map<K, V> map) {
-        Map<K, V> result = new LinkedHashMap<>();
-        map.entrySet().stream().sorted(Map.Entry.<K, V>comparingByKey()).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
-        return result;
     }
 
 

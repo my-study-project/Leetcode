@@ -6,22 +6,22 @@ package com.js;
  */
 
 public class Check implements Runnable {
+    private boolean runNow;
+    // 定义统一的锁对象，避免同时执行
+    private Object lock;
+    private int num;
+    public Check(boolean runNow, Object lock, int num) {
+        this.runNow = runNow;
+        this.lock = lock;
+        this.num = num;
+    }
+
     public static void main(String[] args) {
         Object lock = new Object();
         Thread t1 = new Thread(new Check(true, lock, 1));
         Thread t2 = new Thread(new Check(false, lock, 2));
         t2.start();
         t1.start();
-    }
-    private boolean runNow;
-    // 定义统一的锁对象，避免同时执行
-    private Object lock;
-    private int num;
-
-    public Check(boolean runNow, Object lock, int num) {
-        this.runNow = runNow;
-        this.lock = lock;
-        this.num = num;
     }
 
     @Override

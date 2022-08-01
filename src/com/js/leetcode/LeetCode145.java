@@ -10,16 +10,16 @@ public class LeetCode145 {
     public List<Integer> preorderTraversal(TreeNode root) {
 
         List<Integer> result = new ArrayList<>();
-        preorderTraversalResult(root,result);
+        preorderTraversalResult(root, result);
         return result;
     }
 
     public void preorderTraversalResult(TreeNode root, List<Integer> result) {
-        if (root == null){
-            return ;
+        if (root == null) {
+            return;
         }
-        preorderTraversalResult(root.left,result);
-        preorderTraversalResult(root.right,result);
+        preorderTraversalResult(root.left, result);
+        preorderTraversalResult(root.right, result);
         result.add(root.val);
     }
 }

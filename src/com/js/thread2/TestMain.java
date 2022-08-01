@@ -1,8 +1,15 @@
 package com.js.thread2;
 
 
-import java.util.Queue;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class TestMain {
     //    1. 线程处于阻塞状态：如使用了 sleep,同步锁的 wait,socket 中的 receiver,accept 等方法时，
@@ -32,6 +39,7 @@ public class TestMain {
         SynchronousQueue synchronousQueue = new SynchronousQueue(true);
 
     }
+
     public ExecutorService commonExecutorService() {
 //        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("common-thread-%d").build();
         ThreadFactory namedThreadFactory = Executors.defaultThreadFactory();

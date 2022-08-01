@@ -26,19 +26,6 @@ class Worker extends Thread {
         this.semaphore = semaphore;
     }
 
-    @Override
-    public void run() {
-        try {
-            semaphore.acquire();
-            System.out.println("工人" + this.num + "占用一个机器在生产...");
-            Thread.sleep(2000);
-            System.out.println("工人" + this.num + "释放出机器");
-            semaphore.release();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static Node copyRandomList1(Node head) {
         // 判空
         if (Objects.isNull(head)) {
@@ -119,6 +106,19 @@ class Worker extends Thread {
             newNode = newNode.next;
         }
         return map.get(head);
+    }
+
+    @Override
+    public void run() {
+        try {
+            semaphore.acquire();
+            System.out.println("工人" + this.num + "占用一个机器在生产...");
+            Thread.sleep(2000);
+            System.out.println("工人" + this.num + "释放出机器");
+            semaphore.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 //    public static void main(String[] args) {
